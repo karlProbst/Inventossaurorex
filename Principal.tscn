@@ -1,3 +1,118 @@
-[gd_scene format=3 uid="uid://csh8qcj5ihcna"]
+[gd_scene load_steps=8 format=3 uid="uid://csh8qcj5ihcna"]
+
+[ext_resource type="Script" uid="uid://b2fqe0argvwf8" path="res://InventoryController.gd" id="1_4to2k"]
+[ext_resource type="Texture2D" uid="uid://byd42fvjevh53" path="res://icon.svg" id="2_a35id"]
+[ext_resource type="Resource" uid="uid://dg2bm11yyx4jt" path="res://Items/lsd.tres" id="3_5hs68"]
+[ext_resource type="Script" uid="uid://t301mx26v0p0" path="res://InventoryItem.gd" id="3_a35id"]
+
+[sub_resource type="Gradient" id="Gradient_5hs68"]
+offsets = PackedFloat32Array(0, 0.789082)
+colors = PackedColorArray(0.392157, 0, 0.745098, 1, 0.298039, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_aaorx"]
+fractal_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5eh06"]
+width = 64
+height = 64
+invert = true
+color_ramp = SubResource("Gradient_5hs68")
+noise = SubResource("FastNoiseLite_aaorx")
 
 [node name="Node2D" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control" node_paths=PackedStringArray("dragNode")]
+layout_mode = 0
+offset_right = 500.0
+offset_bottom = 500.0
+script = ExtResource("1_4to2k")
+dragNode = NodePath("Drag")
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Control/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.018
+anchor_top = 0.088
+anchor_right = 0.978
+anchor_bottom = 0.872
+columns = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/Panel/GridContainer"]
+layout_mode = 2
+texture = SubResource("NoiseTexture2D_5eh06")
+script = ExtResource("3_a35id")
+item_data = ExtResource("3_5hs68")
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/Panel/GridContainer"]
+layout_mode = 2
+texture = SubResource("NoiseTexture2D_5eh06")
+script = ExtResource("3_a35id")
+item_data = ExtResource("3_5hs68")
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/Control/Panel/GridContainer"]
+layout_mode = 2
+texture = SubResource("NoiseTexture2D_5eh06")
+script = ExtResource("3_a35id")
+item_data = ExtResource("3_5hs68")
+
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/Control/Panel/GridContainer"]
+layout_mode = 2
+texture = SubResource("NoiseTexture2D_5eh06")
+script = ExtResource("3_a35id")
+item_data = ExtResource("3_5hs68")
+
+[node name="TextureRect5" type="TextureRect" parent="CanvasLayer/Control/Panel/GridContainer"]
+layout_mode = 2
+texture = SubResource("NoiseTexture2D_5eh06")
+script = ExtResource("3_a35id")
+item_data = ExtResource("3_5hs68")
+
+[node name="TextureRect6" type="TextureRect" parent="CanvasLayer/Control/Panel/GridContainer"]
+layout_mode = 2
+texture = SubResource("NoiseTexture2D_5eh06")
+script = ExtResource("3_a35id")
+item_data = ExtResource("3_5hs68")
+
+[node name="TextureRect7" type="TextureRect" parent="CanvasLayer/Control/Panel/GridContainer"]
+layout_mode = 2
+texture = SubResource("NoiseTexture2D_5eh06")
+script = ExtResource("3_a35id")
+item_data = ExtResource("3_5hs68")
+
+[node name="TextureRect8" type="TextureRect" parent="CanvasLayer/Control/Panel/GridContainer"]
+layout_mode = 2
+texture = SubResource("NoiseTexture2D_5eh06")
+script = ExtResource("3_a35id")
+item_data = ExtResource("3_5hs68")
+
+[node name="TextureRect9" type="TextureRect" parent="CanvasLayer/Control/Panel/GridContainer"]
+layout_mode = 2
+texture = SubResource("NoiseTexture2D_5eh06")
+script = ExtResource("3_a35id")
+item_data = ExtResource("3_5hs68")
+
+[node name="Drag" type="TextureRect" parent="CanvasLayer/Control/Panel"]
+layout_mode = 2
+offset_left = -168.0
+offset_top = 41.0
+offset_right = -40.0
+offset_bottom = 169.0
+texture = ExtResource("2_a35id")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Inventario?"

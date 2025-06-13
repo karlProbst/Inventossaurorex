@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=5 format=3 uid="uid://dg2bm11yyx4jt"]
+
+[ext_resource type="Script" uid="uid://dyid55vutkmre" path="res://ItemProperties.gd" id="1_fg21t"]
+
+[sub_resource type="Gradient" id="Gradient_5hs68"]
+offsets = PackedFloat32Array(0, 0.789082)
+colors = PackedColorArray(0.392157, 0, 0.745098, 1, 0.298039, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_aaorx"]
+fractal_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5eh06"]
+width = 64
+height = 64
+invert = true
+color_ramp = SubResource("Gradient_5hs68")
+noise = SubResource("FastNoiseLite_aaorx")
+
+[resource]
+script = ExtResource("1_fg21t")
+item_id = 0
+item_name = ""
+icon = SubResource("NoiseTexture2D_5eh06")
+stackable = false
+max_stack = 0
+price = 0.0
+metadata/_custom_type_script = "uid://dyid55vutkmre"
