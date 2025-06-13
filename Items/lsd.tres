@@ -18,7 +18,7 @@ noise = SubResource("FastNoiseLite_aaorx")
 
 [resource]
 script = ExtResource("1_fg21t")
-id = 0
+id = 1
 item_name = ""
 icon = SubResource("NoiseTexture2D_5eh06")
 stackable = false
