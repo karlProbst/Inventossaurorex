@@ -1,7 +1,7 @@
 extends Resource
 class_name ItemResource
 
-@export var item_id: int = 0
+@export var id: int = 0
 @export var item_name: String
 @export var icon: Texture2D = preload("res://blackTexture.tres")
 @export var stackable: bool = false
