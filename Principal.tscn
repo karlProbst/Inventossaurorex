@@ -1,34 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://csh8qcj5ihcna"]
+[gd_scene load_steps=4 format=3 uid="uid://csh8qcj5ihcna"]
 
 [ext_resource type="Script" uid="uid://b2fqe0argvwf8" path="res://InventoryController.gd" id="1_4to2k"]
-[ext_resource type="Texture2D" uid="uid://byd42fvjevh53" path="res://icon.svg" id="2_a35id"]
-[ext_resource type="Script" uid="uid://t301mx26v0p0" path="res://InventoryItem.gd" id="3_a35id"]
-[ext_resource type="Script" uid="uid://dyid55vutkmre" path="res://ItemProperties.gd" id="3_aaorx"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5hs68"]
-bg_color = Color(0.219501, 0.219501, 0.219501, 1)
-border_width_left = 6
-border_width_top = 6
-border_width_right = 6
-border_width_bottom = 6
-border_blend = true
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-corner_detail = 20
-shadow_color = Color(0, 0, 0, 0)
-anti_aliasing_size = 1.072
-
-[sub_resource type="Resource" id="Resource_nbow7"]
-script = ExtResource("3_aaorx")
-item_id = 0
-item_name = ""
-icon = ExtResource("2_a35id")
-stackable = false
-max_stack = 0
-price = 0.0
-metadata/_custom_type_script = "uid://dyid55vutkmre"
+[ext_resource type="PackedScene" uid="uid://bl8fhnsbk6ndk" path="res://Slot.tscn" id="2_a35id"]
+[ext_resource type="Resource" uid="uid://dg2bm11yyx4jt" path="res://Items/lsd.tres" id="3_5hs68"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -49,6 +23,13 @@ offset_bottom = 500.0
 script = ExtResource("1_4to2k")
 dragNode = NodePath("Drag")
 
+[node name="Drag" parent="CanvasLayer/Control/Panel" instance=ExtResource("2_a35id")]
+layout_mode = 2
+offset_left = -115.0
+offset_top = 44.0
+offset_right = -51.0
+offset_bottom = 108.0
+
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/Control/Panel"]
 layout_mode = 1
 anchors_preset = -1
@@ -59,269 +40,47 @@ anchor_bottom = 0.872
 columns = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="Slot1" type="Control" parent="CanvasLayer/Control/Panel/GridContainer"]
-custom_minimum_size = Vector2(64, 64)
+[node name="Slot1" parent="CanvasLayer/Control/Panel/GridContainer" instance=ExtResource("2_a35id")]
 layout_mode = 2
+item_data = ExtResource("3_5hs68")
 
-[node name="Panel" type="Panel" parent="CanvasLayer/Control/Panel/GridContainer/Slot1"]
-clip_children = 1
-layout_mode = 0
-offset_right = 62.0
-offset_bottom = 62.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_5hs68")
-
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/Panel/GridContainer/Slot1/Panel"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 0
-offset_left = -1.0
-offset_top = -1.0
-offset_right = 63.0
-offset_bottom = 63.0
-texture = ExtResource("2_a35id")
-expand_mode = 3
-script = ExtResource("3_a35id")
-item_data = SubResource("Resource_nbow7")
-
-[node name="Label" type="Label" parent="CanvasLayer/Control/Panel/GridContainer/Slot1"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="Slot2" type="Control" parent="CanvasLayer/Control/Panel/GridContainer"]
-custom_minimum_size = Vector2(64, 64)
+[node name="Slot2" parent="CanvasLayer/Control/Panel/GridContainer" instance=ExtResource("2_a35id")]
 layout_mode = 2
+item_data = ExtResource("3_5hs68")
 
-[node name="Panel" type="Panel" parent="CanvasLayer/Control/Panel/GridContainer/Slot2"]
-clip_children = 1
-layout_mode = 0
-offset_right = 62.0
-offset_bottom = 62.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_5hs68")
-
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/Panel/GridContainer/Slot2/Panel"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 0
-offset_left = -1.0
-offset_top = -1.0
-offset_right = 63.0
-offset_bottom = 63.0
-texture = ExtResource("2_a35id")
-expand_mode = 3
-script = ExtResource("3_a35id")
-item_data = SubResource("Resource_nbow7")
-
-[node name="Label" type="Label" parent="CanvasLayer/Control/Panel/GridContainer/Slot2"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="Slot3" type="Control" parent="CanvasLayer/Control/Panel/GridContainer"]
-custom_minimum_size = Vector2(64, 64)
+[node name="Slot3" parent="CanvasLayer/Control/Panel/GridContainer" instance=ExtResource("2_a35id")]
 layout_mode = 2
+item_data = ExtResource("3_5hs68")
 
-[node name="Panel" type="Panel" parent="CanvasLayer/Control/Panel/GridContainer/Slot3"]
-clip_children = 1
-layout_mode = 0
-offset_right = 62.0
-offset_bottom = 62.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_5hs68")
-
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/Panel/GridContainer/Slot3/Panel"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 0
-offset_left = -1.0
-offset_top = -1.0
-offset_right = 63.0
-offset_bottom = 63.0
-texture = ExtResource("2_a35id")
-expand_mode = 3
-script = ExtResource("3_a35id")
-item_data = SubResource("Resource_nbow7")
-
-[node name="Label" type="Label" parent="CanvasLayer/Control/Panel/GridContainer/Slot3"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="Slot4" type="Control" parent="CanvasLayer/Control/Panel/GridContainer"]
-custom_minimum_size = Vector2(64, 64)
+[node name="Slot4" parent="CanvasLayer/Control/Panel/GridContainer" instance=ExtResource("2_a35id")]
 layout_mode = 2
+item_data = ExtResource("3_5hs68")
 
-[node name="Panel" type="Panel" parent="CanvasLayer/Control/Panel/GridContainer/Slot4"]
-clip_children = 1
-layout_mode = 0
-offset_right = 62.0
-offset_bottom = 62.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_5hs68")
-
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/Panel/GridContainer/Slot4/Panel"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 0
-offset_left = -1.0
-offset_top = -1.0
-offset_right = 63.0
-offset_bottom = 63.0
-texture = ExtResource("2_a35id")
-expand_mode = 3
-script = ExtResource("3_a35id")
-item_data = SubResource("Resource_nbow7")
-
-[node name="Label" type="Label" parent="CanvasLayer/Control/Panel/GridContainer/Slot4"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="Slot5" type="Control" parent="CanvasLayer/Control/Panel/GridContainer"]
-custom_minimum_size = Vector2(64, 64)
+[node name="Slot5" parent="CanvasLayer/Control/Panel/GridContainer" instance=ExtResource("2_a35id")]
 layout_mode = 2
+item_data = ExtResource("3_5hs68")
 
-[node name="Panel" type="Panel" parent="CanvasLayer/Control/Panel/GridContainer/Slot5"]
-clip_children = 1
-layout_mode = 0
-offset_right = 62.0
-offset_bottom = 62.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_5hs68")
-
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/Panel/GridContainer/Slot5/Panel"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 0
-offset_left = -1.0
-offset_top = -1.0
-offset_right = 63.0
-offset_bottom = 63.0
-texture = ExtResource("2_a35id")
-expand_mode = 3
-script = ExtResource("3_a35id")
-item_data = SubResource("Resource_nbow7")
-
-[node name="Label" type="Label" parent="CanvasLayer/Control/Panel/GridContainer/Slot5"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="Slot6" type="Control" parent="CanvasLayer/Control/Panel/GridContainer"]
-custom_minimum_size = Vector2(64, 64)
+[node name="Slot6" parent="CanvasLayer/Control/Panel/GridContainer" instance=ExtResource("2_a35id")]
 layout_mode = 2
+item_data = ExtResource("3_5hs68")
 
-[node name="Panel" type="Panel" parent="CanvasLayer/Control/Panel/GridContainer/Slot6"]
-clip_children = 1
-layout_mode = 0
-offset_right = 62.0
-offset_bottom = 62.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_5hs68")
-
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/Panel/GridContainer/Slot6/Panel"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 0
-offset_left = -1.0
-offset_top = -1.0
-offset_right = 63.0
-offset_bottom = 63.0
-texture = ExtResource("2_a35id")
-expand_mode = 3
-script = ExtResource("3_a35id")
-item_data = SubResource("Resource_nbow7")
-
-[node name="Label" type="Label" parent="CanvasLayer/Control/Panel/GridContainer/Slot6"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="Slot7" type="Control" parent="CanvasLayer/Control/Panel/GridContainer"]
-custom_minimum_size = Vector2(64, 64)
+[node name="Slot7" parent="CanvasLayer/Control/Panel/GridContainer" instance=ExtResource("2_a35id")]
 layout_mode = 2
+item_data = ExtResource("3_5hs68")
 
-[node name="Panel" type="Panel" parent="CanvasLayer/Control/Panel/GridContainer/Slot7"]
-clip_children = 1
-layout_mode = 0
-offset_right = 62.0
-offset_bottom = 62.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_5hs68")
-
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/Panel/GridContainer/Slot7/Panel"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 0
-offset_left = -1.0
-offset_top = -1.0
-offset_right = 63.0
-offset_bottom = 63.0
-texture = ExtResource("2_a35id")
-expand_mode = 3
-script = ExtResource("3_a35id")
-item_data = SubResource("Resource_nbow7")
-
-[node name="Label" type="Label" parent="CanvasLayer/Control/Panel/GridContainer/Slot7"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="Slot8" type="Control" parent="CanvasLayer/Control/Panel/GridContainer"]
-custom_minimum_size = Vector2(64, 64)
+[node name="Slot8" parent="CanvasLayer/Control/Panel/GridContainer" instance=ExtResource("2_a35id")]
 layout_mode = 2
+item_data = ExtResource("3_5hs68")
 
-[node name="Panel" type="Panel" parent="CanvasLayer/Control/Panel/GridContainer/Slot8"]
-clip_children = 1
-layout_mode = 0
-offset_right = 62.0
-offset_bottom = 62.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_5hs68")
-
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/Panel/GridContainer/Slot8/Panel"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 0
-offset_left = -1.0
-offset_top = -1.0
-offset_right = 63.0
-offset_bottom = 63.0
-texture = ExtResource("2_a35id")
-expand_mode = 3
-script = ExtResource("3_a35id")
-item_data = SubResource("Resource_nbow7")
-
-[node name="Label" type="Label" parent="CanvasLayer/Control/Panel/GridContainer/Slot8"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="Slot9" type="Control" parent="CanvasLayer/Control/Panel/GridContainer"]
-custom_minimum_size = Vector2(64, 64)
+[node name="Slot9" parent="CanvasLayer/Control/Panel/GridContainer" instance=ExtResource("2_a35id")]
 layout_mode = 2
-
-[node name="Panel" type="Panel" parent="CanvasLayer/Control/Panel/GridContainer/Slot9"]
-clip_children = 1
-layout_mode = 0
-offset_right = 62.0
-offset_bottom = 62.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_5hs68")
-
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/Panel/GridContainer/Slot9/Panel"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 0
-offset_left = -1.0
-offset_top = -1.0
-offset_right = 63.0
-offset_bottom = 63.0
-texture = ExtResource("2_a35id")
-expand_mode = 3
-script = ExtResource("3_a35id")
-item_data = SubResource("Resource_nbow7")
-
-[node name="Label" type="Label" parent="CanvasLayer/Control/Panel/GridContainer/Slot9"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="Drag" type="TextureRect" parent="CanvasLayer/Control/Panel"]
-layout_mode = 2
-offset_left = -168.0
-offset_top = 41.0
-offset_right = -40.0
-offset_bottom = 169.0
-texture = ExtResource("2_a35id")
-expand_mode = 3
+item_data = ExtResource("3_5hs68")
 
 [node name="Label" type="Label" parent="CanvasLayer/Control"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Inventario?"
+
+[connection signal="mouse_entered" from="CanvasLayer/Control/Panel" to="CanvasLayer/Control/Panel" method="_on_mouse_entered_panel"]
+[connection signal="mouse_exited" from="CanvasLayer/Control/Panel" to="CanvasLayer/Control/Panel" method="_on_mouse_exited_panel"]
