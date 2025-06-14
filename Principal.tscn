@@ -42,18 +42,31 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="CanvasLayer/Control"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = -1.0
+offset_top = 1.0
+offset_right = 499.0
+offset_bottom = 45.0
 text = "INV-REX 0.2 beta "
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="AddLSDButton" type="Button" parent="CanvasLayer/Control"]
+[node name="AddRandomItem" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 0
-offset_left = 693.0
-offset_top = 172.0
-offset_right = 792.0
-offset_bottom = 205.0
-text = "Add LSD"
+offset_left = 256.0
+offset_top = 459.0
+offset_right = 488.0
+offset_bottom = 492.0
+text = "Add new item in random slot"
+
+[node name="AddNewItem" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 377.0
+offset_top = 418.0
+offset_right = 492.0
+offset_bottom = 451.0
+text = "Add new item"
 
 [connection signal="mouse_entered" from="CanvasLayer/Control/Panel" to="CanvasLayer/Control/Panel" method="_on_mouse_entered_panel"]
 [connection signal="mouse_exited" from="CanvasLayer/Control/Panel" to="CanvasLayer/Control/Panel" method="_on_mouse_exited_panel"]
-[connection signal="pressed" from="CanvasLayer/Control/AddLSDButton" to="CanvasLayer/Control/Panel" method="_on_add_lsd_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/AddRandomItem" to="CanvasLayer/Control/Panel" method="_on_add_random_slot_item"]
+[connection signal="pressed" from="CanvasLayer/Control/AddNewItem" to="CanvasLayer/Control/Panel" method="_on_add_new_item_pressed"]

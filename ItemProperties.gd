@@ -2,7 +2,6 @@ extends Resource
 class_name ItemResource
 
 var itemxy: Vector2i = Vector2i(0,0)
-
 @export var id: int = 0
 @export var item_name: String
 @export var icon: Texture2D = preload("res://blackTexture.tres")
