@@ -7,7 +7,12 @@ extends Control
 func set_item_data(data: ItemResource) -> void:
 	item_data = data
 	_update_visual()
-
+	#remove later
+	if item_data.id==1:
+		$Panel/TextureRect.texture.noise.seed=randi_range(1,9999)
+		$Panel/TextureRect.texture.noise.noise_type=randi_range(0,5)
+		
+		
 func clear_item() -> void:
 	item_data = null
 	_update_visual()
@@ -18,7 +23,7 @@ func _update_visual()->void:
 		return 
 	# Atualiza o ícone
 	if icon_node:
-		icon_node.texture = item_data.icon if item_data.icon != null else null
+		icon_node.texture = item_data.icon
 	# Atualiza o stack label
 	if label_node:
 		if item_data.stackable and item_data.stack >= 0:
@@ -29,3 +34,6 @@ func _update_visual()->void:
 			label_node.text = str(item_data.itemxy)
 		else:
 			label_node.visible = false
+
+
+			

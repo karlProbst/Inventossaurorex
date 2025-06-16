@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://csh8qcj5ihcna"]
+[gd_scene load_steps=4 format=3 uid="uid://csh8qcj5ihcna"]
 
 [ext_resource type="Script" uid="uid://b2fqe0argvwf8" path="res://InventoryController.gd" id="1_4to2k"]
+[ext_resource type="Script" uid="uid://dwluipgvli42h" path="res://Inventory_Input_Logic_Handler.gd" id="2_5hs68"]
 [ext_resource type="PackedScene" uid="uid://bl8fhnsbk6ndk" path="res://Scenes/Slot.tscn" id="2_a35id"]
 
 [node name="Node2D" type="Node2D"]
@@ -15,13 +16,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="CanvasLayer/Control" node_paths=PackedStringArray("dragNode")]
+[node name="Panel" type="Panel" parent="CanvasLayer/Control"]
 layout_mode = 0
 offset_right = 500.0
 offset_bottom = 500.0
 script = ExtResource("1_4to2k")
-ARRAY_SIZE_Y = 5
-dragNode = NodePath("Drag")
+
+[node name="InputLogicHandler" type="Node" parent="CanvasLayer/Control/Panel"]
+script = ExtResource("2_5hs68")
 
 [node name="Drag" parent="CanvasLayer/Control/Panel" instance=ExtResource("2_a35id")]
 layout_mode = 2

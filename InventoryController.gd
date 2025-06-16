@@ -15,15 +15,20 @@ var maxItems=ARRAY_SIZE_X*ARRAY_SIZE_Y
 const INVALID_SLOT = Vector2i(-1, -1)
 const EMPTY_SLOT = Vector2i(0, 0)
 
+
 #checa se os nodes e o array size sao validos
 #instancia os nodes vazios do inventario
 #carrega itens salvos?
+
+
+		
+		
 func UpdateGrid(_value):
 	itemArray = updateArray(itemArray,Vector2(ARRAY_SIZE_X,ARRAY_SIZE_Y))
 	maxItems=ARRAY_SIZE_X*ARRAY_SIZE_Y
 	get_node("GridContainer").columns = ARRAY_SIZE_X
-	for y in ARRAY_SIZE_Y:
-		for x in ARRAY_SIZE_X:
+	for x in ARRAY_SIZE_X:
+		for y in ARRAY_SIZE_Y:
 			InstantiateSlotScene(slotScene,get_node("GridContainer"),ItemResource.new(),Vector2i(x,y))
 	
 	for slot in get_children():
@@ -34,26 +39,37 @@ func _ready() -> void:
 
 #todo: fazer dicionario
 func GetSlotNode(itemxy:Vector2i)->Node:
-	for slot in get_node("GridContainer").get_children():
-		if "item_data" in slot: 
-			if slot.item_data.itemxy==itemxy:
-				return slot
-	printerr("DIDNT FOUND SLOT NODE")
+	for x in ARRAY_SIZE_X:
+		for y in ARRAY_SIZE_Y:
+			if itemArray[x][y] == itemxy:
+				return itemArray[x][y]
+	printerr("nao conseguiu, inv lotado")
 	return null
-func InstantiateSlotScene(scene:PackedScene,fatherNode:Node,resource:ItemResource,itemxy:Vector2i):
+
+
+func InstantiateSlotScene(scene:PackedScene,fatherNode:Node,resource:ItemResource,itemxy:Vector2i)->void:
 	if itemxy == INVALID_SLOT:
 		printerr("no valid slot,full?")
 		return
 	var newInstance=scene.instantiate()
 	fatherNode.add_child(newInstance)
-	resource.itemxy=itemxy
+	itemArray[itemxy.x][itemxy.y]=newInstance
 	newInstance.set_item_data(resource)
 	
 func FindFirstOpenSlot() -> Vector2i:
-	for slot in get_node("GridContainer").get_children():
-		if slot.item_data != null and slot.item_data.id == 0:
-			return slot.item_data.itemxy
+	#checa se há slot livre
+	for x in ARRAY_SIZE_X:
+		for y in ARRAY_SIZE_Y:
+			if itemArray[x][y].item_data.id == 0:
+				return Vector2i(x, y)
+	printerr("nao conseguiu, inv lotado")
 	return INVALID_SLOT
+
+		
+#	for slot in get_node("GridContainer").get_children():
+#		if slot.item_data != null and slot.item_data.id == 0:
+#			return slot.item_data.itemxy
+#	return INVALID_SLOT
 
 
 
@@ -91,24 +107,28 @@ func AddItem(resource: ItemResource,itemxy:Vector2i=EMPTY_SLOT) -> bool:
 	#Se EMPTY, encontrar o primeiro slot disponível
 	if itemxy == EMPTY_SLOT:
 		target_pos = FindFirstOpenSlot()
+		print("CAIU NO BUG ",target_pos)
 	else:
+		print("CAIU NO RAIO DO ELSE",target_pos)
 		target_pos = itemxy
 	# Confere se o inventário está cheio
 	if target_pos == INVALID_SLOT:
 		printerr("Inventário cheio! Não foi possível adicionar o item: ", resource.id)
 		return false
 	# Confere se está dentro dos limites da grid
-	if target_pos.x < 0 or target_pos.x >= ARRAY_SIZE_X or target_pos.y < 0 or target_pos.y >= ARRAY_SIZE_Y:
+	if target_pos.x < 0 or target_pos.x > ARRAY_SIZE_X or target_pos.y < 0 or target_pos.y > ARRAY_SIZE_Y:
 		printerr("Out of bounds addition!! ", target_pos)
+		print( Vector2i(ARRAY_SIZE_X,ARRAY_SIZE_Y))
 		return false
-
-
-	for slot in get_node("GridContainer").get_children():
-		if slot.item_data.id == 0 and slot.item_data.itemxy == target_pos:
-			slot.set_item_data(resource)
-			return true
-
+	
+	if itemArray[target_pos.x][target_pos.y].item_data.id==0:
+		var slot = itemArray[target_pos.x][target_pos.y]
+		slot.set_item_data(resource)
+		return true
+	printerr("Slot ocupied! ",itemArray[itemxy.x][itemxy.y].item_data.id)
 	return false
+
+
 
 
 func _on_mouse_entered_panel() -> void:
@@ -119,7 +139,7 @@ func _on_mouse_exited_panel() -> void:
 
 
 func _on_add_random_slot_item() -> void:
-	AddItem(preload("res://Items/lsd.tres"),Vector2i(randi_range(0,3),randi_range(0,5)))
+	AddItem(preload("res://Items/lsd.tres"),Vector2i(1,2))
 
 
 func _on_add_new_item_pressed() -> void:
