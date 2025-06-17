@@ -10,8 +10,6 @@ func _ready():
 	connect("mouse_exited", Callable(self, "_on_mouse_exited"))
 
 func set_item_data(value):
-	if value:
-		item_data = value
 	if item_data != null:
 		if item_data.icon != null:
 			if has_node("Panel/TextureRect"):

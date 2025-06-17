@@ -9,21 +9,32 @@ var itemArray:Array=[]
 
 @export var dragNode: Node
 var slotNode:Node = dragNode
-@export var updateItems: bool :set = UpdateGrid
+@export var updateItems: bool
 var maxItems=ARRAY_SIZE_X*ARRAY_SIZE_Y
 #funcionar com joystick  e touch
 const INVALID_SLOT = Vector2i(-1, -1)
 const EMPTY_SLOT = Vector2i(0, 0)
 
+@onready var inputLogicHandler:Node= $InputLogicHandler
 
 #checa se os nodes e o array size sao validos
 #instancia os nodes vazios do inventario
 #carrega itens salvos?
 
 
-		
-		
-func UpdateGrid(_value):
+func AddMouseSignal(slot: Node) -> void:
+	if slot.has_signal("mouse_entered"):
+		slot.connect(
+			"mouse_entered",
+			Callable(inputLogicHandler, "_on_slot_hover_entered").bind(slot.get_parent())
+		)
+	if slot.has_signal("mouse_exited"):
+		slot.connect(
+			"mouse_exited",
+			Callable(inputLogicHandler, "_on_slot_hover_exited").bind(slot.get_parent())
+		)
+
+func UpdateGrid():
 	itemArray = updateArray(itemArray,Vector2(ARRAY_SIZE_X,ARRAY_SIZE_Y))
 	maxItems=ARRAY_SIZE_X*ARRAY_SIZE_Y
 	get_node("GridContainer").columns = ARRAY_SIZE_X
@@ -31,11 +42,10 @@ func UpdateGrid(_value):
 		for y in ARRAY_SIZE_Y:
 			InstantiateSlotScene(slotScene,get_node("GridContainer"),ItemResource.new(),Vector2i(x,y))
 	
-	for slot in get_children():
-		if slot.has_signal("slot_clicked"):
-			slot.connect("slot_clicked", Callable(self, "_on_slot_clicked").bind(slot))
+
+			
 func _ready() -> void:
-	UpdateGrid(true)
+	UpdateGrid()
 
 #todo: fazer dicionario
 func GetSlotNode(itemxy:Vector2i)->Node:
@@ -55,7 +65,7 @@ func InstantiateSlotScene(scene:PackedScene,fatherNode:Node,resource:ItemResourc
 	fatherNode.add_child(newInstance)
 	itemArray[itemxy.x][itemxy.y]=newInstance
 	newInstance.set_item_data(resource)
-	
+	AddMouseSignal(newInstance.get_node("Panel"))
 func FindFirstOpenSlot() -> Vector2i:
 	#checa se há slot livre
 	for x in ARRAY_SIZE_X:
@@ -107,9 +117,7 @@ func AddItem(resource: ItemResource,itemxy:Vector2i=EMPTY_SLOT) -> bool:
 	#Se EMPTY, encontrar o primeiro slot disponível
 	if itemxy == EMPTY_SLOT:
 		target_pos = FindFirstOpenSlot()
-		print("CAIU NO BUG ",target_pos)
 	else:
-		print("CAIU NO RAIO DO ELSE",target_pos)
 		target_pos = itemxy
 	# Confere se o inventário está cheio
 	if target_pos == INVALID_SLOT:
@@ -128,14 +136,6 @@ func AddItem(resource: ItemResource,itemxy:Vector2i=EMPTY_SLOT) -> bool:
 	printerr("Slot ocupied! ",itemArray[itemxy.x][itemxy.y].item_data.id)
 	return false
 
-
-
-
-func _on_mouse_entered_panel() -> void:
-	pass 
-
-func _on_mouse_exited_panel() -> void:
-	pass 
 
 
 func _on_add_random_slot_item() -> void:

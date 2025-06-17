@@ -6,11 +6,11 @@ extends Node
 #keyboard
 #controller
 
-
+#select
 #drag
 #drop
 #highlight
-#highlight
+#Hint
 #use
 var selected_slot: Vector2i = Vector2i.ZERO
 var dragging_item = null
@@ -34,3 +34,16 @@ func use_selected_item() -> void:
 func drop_selected_item() -> void:
 	# Exemplo básico
 	pass
+	
+func _on_slot_hover_entered(slot):
+	slot.get_node("Highlight").visible=true
+
+func _on_slot_hover_exited(slot):
+	slot.get_node("Highlight").visible=false
+
+
+
+
+
+func _on_slot_mouse_entered() -> void:
+	print("Mouse left: ")

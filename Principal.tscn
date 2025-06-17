@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://csh8qcj5ihcna"]
+[gd_scene load_steps=3 format=3 uid="uid://csh8qcj5ihcna"]
 
 [ext_resource type="Script" uid="uid://b2fqe0argvwf8" path="res://InventoryController.gd" id="1_4to2k"]
 [ext_resource type="Script" uid="uid://dwluipgvli42h" path="res://Inventory_Input_Logic_Handler.gd" id="2_5hs68"]
-[ext_resource type="PackedScene" uid="uid://bl8fhnsbk6ndk" path="res://Scenes/Slot.tscn" id="2_a35id"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -21,16 +20,12 @@ layout_mode = 0
 offset_right = 500.0
 offset_bottom = 500.0
 script = ExtResource("1_4to2k")
+ARRAY_SIZE_X = 15
+ARRAY_SIZE_Y = 10
 
-[node name="InputLogicHandler" type="Node" parent="CanvasLayer/Control/Panel"]
+[node name="InputLogicHandler" type="Node" parent="CanvasLayer/Control/Panel" node_paths=PackedStringArray("inventory_node")]
 script = ExtResource("2_5hs68")
-
-[node name="Drag" parent="CanvasLayer/Control/Panel" instance=ExtResource("2_a35id")]
-layout_mode = 2
-offset_left = -115.0
-offset_top = 44.0
-offset_right = -51.0
-offset_bottom = 108.0
+inventory_node = NodePath("..")
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/Control/Panel"]
 layout_mode = 1
@@ -71,4 +66,5 @@ text = "Add new item"
 [connection signal="mouse_entered" from="CanvasLayer/Control/Panel" to="CanvasLayer/Control/Panel" method="_on_mouse_entered_panel"]
 [connection signal="mouse_exited" from="CanvasLayer/Control/Panel" to="CanvasLayer/Control/Panel" method="_on_mouse_exited_panel"]
 [connection signal="pressed" from="CanvasLayer/Control/AddRandomItem" to="CanvasLayer/Control/Panel" method="_on_add_random_slot_item"]
+[connection signal="mouse_entered" from="CanvasLayer/Control/AddNewItem" to="CanvasLayer/Control/Panel/InputLogicHandler" method="_on_add_new_item_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/Control/AddNewItem" to="CanvasLayer/Control/Panel" method="_on_add_new_item_pressed"]
